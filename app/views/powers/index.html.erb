@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Powers</h1>
+
+<div id="powers">
+  <% @powers.each do |power| %>
+    <%= render power %>
+    <p>
+      <%= link_to "Show this power", power %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New power", new_power_path %>

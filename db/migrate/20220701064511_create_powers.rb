@@ -4,7 +4,7 @@ class CreatePowers < ActiveRecord::Migration[7.0]
       t.string :name
       t.integer :damage_points
       t.string :description
-      t.string :category
+      t.string :element
       t.references :race, null: false, foreign_key: true
 
       t.timestamps

@@ -64,7 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_065134) do
     t.string "name"
     t.integer "damage_points"
     t.string "description"
-    t.string "category"
+    t.string "element"
     t.bigint "race_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

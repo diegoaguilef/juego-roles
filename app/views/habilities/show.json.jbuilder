@@ -1,1 +1,1 @@
-json.partial! "habilities/hability", hability: @hability
+json.partial! "habilities/skill", skill: @skill

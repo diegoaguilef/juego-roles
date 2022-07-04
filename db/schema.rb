@@ -43,17 +43,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_065134) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "habilities", force: :cascade do |t|
-    t.string "name"
-    t.integer "damage_points"
-    t.string "description"
-    t.string "category"
-    t.bigint "race_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["race_id"], name: "index_habilities_on_race_id"
-  end
-
   create_table "permissions", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -76,6 +65,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_065134) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.integer "damage_points"
+    t.string "description"
+    t.string "category"
+    t.bigint "race_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["race_id"], name: "index_skills_on_race_id"
   end
 
   create_table "user_characters", force: :cascade do |t|
@@ -113,8 +113,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_065134) do
   add_foreign_key "character_equipments", "characters"
   add_foreign_key "character_equipments", "equipment"
   add_foreign_key "characters", "races"
-  add_foreign_key "habilities", "races"
   add_foreign_key "powers", "races"
+  add_foreign_key "skills", "races"
   add_foreign_key "user_characters", "characters"
   add_foreign_key "user_characters", "users"
   add_foreign_key "user_permissions", "permissions"

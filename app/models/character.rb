@@ -1,10 +1,14 @@
 class Character < ApplicationRecord
   belongs_to :race
   belongs_to :user
-  has_many :character_equipments
-  has_many :equipments, through: :character_equipments
+  has_many :configurations
+  has_many :powers, through: :configurations, source: :configurable, source_type: "Power"
+  has_many :equipments, through: :configurations, source: :configurable, source_type: "Equipment"
+  has_many :skills, through: :configurations, source: :configurable, source_type: "Skill"
 
   before_validation :set_defaults, unless: :characters_templates
+
+  enum status: {alive: 0, dead: 1 }
 
   
   private

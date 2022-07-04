@@ -10,18 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_01_065101) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_04_094338) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "character_equipments", force: :cascade do |t|
-    t.bigint "character_id", null: false
-    t.bigint "equipment_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["character_id"], name: "index_character_equipments_on_character_id"
-    t.index ["equipment_id"], name: "index_character_equipments_on_equipment_id"
-  end
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
@@ -35,6 +26,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_065101) do
     t.datetime "updated_at", null: false
     t.index ["race_id"], name: "index_characters_on_race_id"
     t.index ["user_id"], name: "index_characters_on_user_id"
+  end
+
+  create_table "configurations", force: :cascade do |t|
+    t.string "summary"
+    t.string "configurable_type"
+    t.bigint "configurable_id"
+    t.bigint "user_id", null: false
+    t.bigint "character_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["character_id"], name: "index_configurations_on_character_id"
+    t.index ["configurable_type", "configurable_id"], name: "index_configurations_on_configurable"
+    t.index ["user_id"], name: "index_configurations_on_user_id"
   end
 
   create_table "equipment", force: :cascade do |t|
@@ -103,10 +107,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_065101) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "character_equipments", "characters"
-  add_foreign_key "character_equipments", "equipment"
   add_foreign_key "characters", "races"
   add_foreign_key "characters", "users"
+  add_foreign_key "configurations", "characters"
+  add_foreign_key "configurations", "users"
   add_foreign_key "powers", "races"
   add_foreign_key "skills", "races"
   add_foreign_key "user_permissions", "permissions"

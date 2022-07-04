@@ -4,11 +4,10 @@ class Character < ApplicationRecord
   has_many :character_equipments
   has_many :equipments, through: :character_equipments
 
-  before_validation :set_defaults, if: Character.all.size >= 2
-  validates :skills
-  validates :race
+  before_validation :set_defaults, unless: :characters_templates
 
-
+  
+  private
 
   def set_defaults
     self.level = 1
@@ -17,5 +16,10 @@ class Character < ApplicationRecord
     errors.add(:powers, "Personaje debe comenzar con 1 poder") if race.powers.size != 1
     errors.add(:equipment, "Personaje debe comenzar con 1 equipamiento") if equipments.size != 1
   end
+
+  def characters_templates
+    Character.all.size <= 2
+  end
+
 end
 

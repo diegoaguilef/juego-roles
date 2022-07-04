@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 u = User.create! nickname: "kdiegoxc", role: "admin", password: "diego123", email: "diego@guilef.cl"
-User.create! nickname: "erick", role: "user", password: "erick123", email: "erick@kunz.cl"
+u1 = User.create! nickname: "erick", role: "user", password: "erick123", email: "erick@kunz.cl"
 
 p1 = Permission.create! name: "delete"
 p2 = Permission.create! name: "update"
@@ -24,8 +24,8 @@ UserPermission.create! permission: p5, user: u
 r1 = Race.create! name: "Elfo", description: "Tipos con orjas largas"
 r2 = Race.create! name: "Orco", description: "Tipos grandes y verdes"
 
-pr1 = Character.create! name:"Luis123", level: 512, life_points: 1000, mana: 1100, race: r1
-pr2 = Character.create! name:"jedy1234", level: 612, life_points: 1000, mana: 1100, race: r2
+pr1 = Character.create! name:"Luis123", level: 512, life_points: 1000, mana: 1100, race: r1, user: u1
+pr2 = Character.create! name:"jedy1234", level: 612, life_points: 1000, mana: 1100, race: r2, user: u1
 
 Power.create! name: "Bola de fuego", damage_points: 150, description: "Dispara una bola de fuego al enemigo", element: "fire", race: r1
 Power.create! name: "Oleada", damage_points: 140, description: "Genera una ola de agua", element: "water", race: r1

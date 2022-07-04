@@ -7,6 +7,7 @@ class CreateCharacters < ActiveRecord::Migration[7.0]
       t.integer :life_points
       t.string :status
       t.references :race, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

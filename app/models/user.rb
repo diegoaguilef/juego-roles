@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :user_permissions
   has_many :permissions, through: :user_permissions
+  has_many :characters
 
   def gm?
     role == "gm"

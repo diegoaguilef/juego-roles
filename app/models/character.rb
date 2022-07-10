@@ -7,6 +7,7 @@ class Character < ApplicationRecord
   has_many :skills, through: :configurations, source: :configurable, source_type: "Skill"
 
   before_validation :set_defaults, unless: :characters_templates
+  validate :level_update
 
   enum status: {alive: 0, dead: 1 }
 
@@ -25,5 +26,8 @@ class Character < ApplicationRecord
     Character.all.size <= 2
   end
 
+  def level_update
+    errors.add(:level, "Nivel no puede ser menor al actual #{level}") if level < level_was
+  end
 end
 

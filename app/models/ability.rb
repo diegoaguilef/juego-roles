@@ -4,7 +4,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :manage, :all, if user.admin?
+    can :manage, :all if user.admin?
     player_permissions(user)
     gm_permissions(user)
   end

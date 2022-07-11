@@ -1,25 +1,25 @@
-class HabilitiesController < ApplicationController
+class SkillsController < ApplicationController
   before_action :set_skill, only: %i[ show edit update destroy ]
 
-  # GET /habilities or /habilities.json
+  # GET /skills or /skills.json
   def index
-    @habilities = Skill.all
+    @skills = Skill.all
   end
 
-  # GET /habilities/1 or /habilities/1.json
+  # GET /skills/1 or /skills/1.json
   def show
   end
 
-  # GET /habilities/new
+  # GET /skills/new
   def new
     @skill = Skill.new
   end
 
-  # GET /habilities/1/edit
+  # GET /skills/1/edit
   def edit
   end
 
-  # POST /habilities or /habilities.json
+  # POST /skills or /skills.json
   def create
     @skill = Skill.new(skill_params)
 
@@ -34,7 +34,7 @@ class HabilitiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /habilities/1 or /habilities/1.json
+  # PATCH/PUT /skills/1 or /skills/1.json
   def update
     respond_to do |format|
       if @skill.update(skill_params)
@@ -47,12 +47,12 @@ class HabilitiesController < ApplicationController
     end
   end
 
-  # DELETE /habilities/1 or /habilities/1.json
+  # DELETE /skills/1 or /skills/1.json
   def destroy
     @skill.destroy
 
     respond_to do |format|
-      format.html { redirect_to habilities_url, notice: "Skill was successfully destroyed." }
+      format.html { redirect_to skills_url, notice: "Skill was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :statuses
   resources :equipment
   resources :characters
-  resources :habilities
+  resources :skills
   resources :powers
   resources :races
   resources :permissions

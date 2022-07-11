@@ -22,9 +22,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_094338) do
     t.string "status"
     t.bigint "race_id", null: false
     t.bigint "user_id", null: false
+    t.bigint "status_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["race_id"], name: "index_characters_on_race_id"
+    t.index ["status_id"], name: "index_characters_on_status_id"
     t.index ["user_id"], name: "index_characters_on_user_id"
   end
 
@@ -84,6 +86,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_094338) do
     t.index ["race_id"], name: "index_skills_on_race_id"
   end
 
+  create_table "statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_permissions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "permission_id", null: false
@@ -108,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_094338) do
   end
 
   add_foreign_key "characters", "races"
+  add_foreign_key "characters", "statuses"
   add_foreign_key "characters", "users"
   add_foreign_key "configurations", "characters"
   add_foreign_key "configurations", "users"

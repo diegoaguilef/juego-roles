@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :permissions, through: :user_permissions
   has_many :characters
 
+  before_create :init_user
+
   def gm?
     role == "gm"
   end
@@ -18,5 +20,11 @@ class User < ApplicationRecord
 
   def user?
     role == "user"
+  end
+
+  private
+
+  def init_user
+    self.role = 'user'
   end
 end

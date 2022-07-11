@@ -1,6 +1,7 @@
 class Character < ApplicationRecord
   belongs_to :race
   belongs_to :user
+  belongs_to :status
   has_many :configurations
   has_many :powers, through: :configurations, source: :configurable, source_type: "Power"
   has_many :equipments, through: :configurations, source: :configurable, source_type: "Equipment"
@@ -9,9 +10,10 @@ class Character < ApplicationRecord
   before_validation :set_defaults, unless: :characters_templates
   validate :level_update
 
-  enum status: {alive: 0, dead: 1 }
+  def alive?
+    status.name == "alive"
+  end
 
-  
   private
 
   def set_defaults
@@ -27,7 +29,7 @@ class Character < ApplicationRecord
   end
 
   def level_update
-    errors.add(:level, "Nivel no puede ser menor al actual #{level}") if level < level_was
+    errors.add(:level, "Nivel no puede ser menor al actual #{level}") if level_was && level < level_was
   end
 end
 

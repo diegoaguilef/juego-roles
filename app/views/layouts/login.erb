@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JuegoRoles</title>
+  <%= favicon_link_tag 'role-icon.png' %>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<body style="background: url('<%= image_path 'role_game_bg.jpg' %>') no-repeat fixed center">
+  <nav class="navbar bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="<%= image_path 'role-icon-2.png' %>" alt="" width="30" height="30">
+      </a>
+    </div>
+  </nav>
+  <div class="container-fluid d-flex justify-content-center">
+    <%= yield %>
+  </div>
+</body>
+</html>

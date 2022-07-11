@@ -1,0 +1,71 @@
+version: '3'
+services:
+  db:
+    restart: always
+    image: postgres:12-alpine
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_DB: $POSTGRES_DB
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+    volumes:
+      - ~/volumes/juegoroles-backup:/var/lib/postgresql/data
+    networks:
+      - roles-network
+  web:
+    build:
+      context: .
+    restart: always
+    depends_on:
+      - db
+      - redis
+    links:
+      - db
+      - redis
+    ports:
+      - '8668:3000'
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_HOST: $POSTGRES_HOST
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+      RAILS_MASTER_KEY: $RAILS_MASTER_KEY
+      REDIS_PORT: $REDIS_PORT
+      REDIS_HOST: $REDIS_HOST
+      RAILS_LOG_TO_STDOUT: "YES"
+      RAILS_SERVE_STATIC_FILES: "YES"
+    volumes:
+      - ~/volumes/roles-storage/:/usr/src/app/storage/
+    networks:
+      - roles-network
+  sidekiq:
+    build:
+      context: .
+    restart: always
+    depends_on:
+      - redis
+    links:
+      - redis
+    command: bundle exec sidekiq -C config/sidekiq.yml -e production
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_HOST: $POSTGRES_HOST
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+      RAILS_MASTER_KEY: $RAILS_MASTER_KEY
+      REDIS_PORT: $REDIS_PORT
+      REDIS_HOST: $REDIS_HOST
+      RAILS_LOG_TO_STDOUT: "YES"
+    networks:
+      - roles-network
+  redis:
+    restart: always
+    image: 'redis'
+    command: redis-server --port 6379 --appendonly yes
+    networks:
+      - roles-network
+volumes:
+  db:
+networks:
+  roles-network:

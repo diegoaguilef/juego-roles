@@ -1,4 +1,4 @@
-FROM ruby:3.1-alpine3.15
+FROM ruby:3.1.1-alpine3.15
 RUN apk --no-cache update && apk add --update --no-cache nodejs
 RUN apk --update --no-cache add --virtual build_deps \
 build-base ruby-dev libc-dev linux-headers \

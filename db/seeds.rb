@@ -8,13 +8,13 @@
 
 u = User.create! nickname: "kdiegoxc", role: "admin", password: "diego123", email: "diego@aguilef.cl"
 u1 = User.create! nickname: "erick", role: "user", password: "erick123", email: "erick@kunz.cl"
-gm = User.create! nickname: "Game Master", role: "gm", password: "admin123", email: "gm@juego.cl"
+gm = User.create! nickname: "GameMaster", role: "gm", password: "admin123", email: "gm@juego.cl"
 
-p1 = Permission.create! name: "delete"
-p2 = Permission.create! name: "update"
-p3 = Permission.create! name: "show"
-p4 = Permission.create! name: "PUT"
-p5 = Permission.create! name: "PATCH"
+p1 = Permission.create! name: "Eliminar", action: "delete", resource: 'all'
+p2 = Permission.create! name: "Actualizar", action: "update", resource: 'all'
+p3 = Permission.create! name: "Crear", action: "create", resource: 'all'
+p4 = Permission.create! name: "Ver", action: "show", resource: 'all'
+p5 = Permission.create! name: "Listar", action: "index", resource: 'all'
 
 UserPermission.create! permission: p1, user: u
 UserPermission.create! permission: p2, user: u

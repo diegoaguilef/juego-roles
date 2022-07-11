@@ -75,3 +75,4 @@ end
 gem 'devise'
 gem 'cancancan'
 gem 'bootstrap', '~> 5.1.3'
+gem 'sidekiq'

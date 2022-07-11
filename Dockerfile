@@ -11,3 +11,4 @@ RUN RAILS_ENV=production bundle install
 COPY . /usr/src/app/
 EXPOSE 3000
 RUN ["chmod", "+x", "/usr/src/app/rails.sh"]
+CMD ["/usr/src/app/rails.sh"]

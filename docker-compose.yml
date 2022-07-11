@@ -24,7 +24,7 @@ services:
       - db
       - redis
     ports:
-      - '8668:3000'
+      - '3000:3000'
     environment:
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_HOST: $POSTGRES_HOST

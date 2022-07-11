@@ -1,9 +1,9 @@
 sidekiq_config = {}
 
 if Rails.env.production?
-  sidekiq_config = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}", namespace: "roles-#{Rails.env}" }
+  sidekiq_config = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
 elsif Rails.env.development?
-  sidekiq_config = { url: 'redis://localhost:6379', namespace: "roles-#{Rails.env}" }
+  sidekiq_config = { url: 'redis://localhost:6379' }
 end
 
 Sidekiq.configure_server do |config|

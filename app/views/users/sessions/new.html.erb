@@ -8,7 +8,7 @@
     <% end %>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name, format: :html)) do |f| %>
       <div class="field">
-        <%= f.label :login, class: 'form-label' %><br />
+        <%= f.label :login, 'Nickname o Email', class: 'form-label' %><br />
         <%= f.text_field :login, autofocus: true, class: 'form-control' %>
       </div>
 

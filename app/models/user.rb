@@ -23,8 +23,8 @@ class User < ApplicationRecord
     role == "admin"
   end
 
-  def user?
-    role == "user"
+  def player?
+    role == "player"
   end
 
   def self.find_for_database_authentication(warden_condition)
@@ -41,6 +41,6 @@ class User < ApplicationRecord
   private
 
   def init_user
-    self.role = 'user'
+    self.role = 'player'
   end
 end

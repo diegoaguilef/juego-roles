@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
+  get 'users/index'
   require "sidekiq/web"
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => "/sidekiq"
   end
   resources :statuses
-  resources :equipment
+  resources :equipments
   resources :characters
   resources :skills
   resources :powers
   resources :races
   resources :permissions
+  resources :users
   get 'home/index'
   get 'home/contact'
   get 'home/mipage'
@@ -22,5 +24,5 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     passwords: 'users/passwords'
-  }
+  }, path: "/auth"
 end

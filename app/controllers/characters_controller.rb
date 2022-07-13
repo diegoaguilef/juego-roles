@@ -3,7 +3,7 @@ class CharactersController < ApplicationController
 
   # GET /characters or /characters.json
   def index
-    @characters = Character.all
+    @characters = current_user.admin? || current_user.gm? ?  Character.all : current_user.characters
   end
 
   # GET /characters/1 or /characters/1.json
@@ -22,7 +22,7 @@ class CharactersController < ApplicationController
   # POST /characters or /characters.json
   def create
     @character = Character.new(character_params)
-
+    @character.user = current_user
     respond_to do |format|
       if @character.save
         format.html { redirect_to character_url(@character), notice: "Character was successfully created." }
@@ -65,6 +65,11 @@ class CharactersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def character_params
-      params.require(:character).permit(:name, :level, :mana, :life_points, :status, :race_id)
+      params.require(:character).permit(
+        :name, :level, :mana, :life_points, :status_id, :race_id,
+        skills_attributes: [:id],
+        powers_attributes: [:id],
+        equipments_attributes: [:id]
+        )
     end
 end

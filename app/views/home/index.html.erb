@@ -1,0 +1,27 @@
+<div class="container">
+    <% if current_user.player? %>
+    <h1>Mis Personajes</h1>
+    <% @characters.where(user_id: current_user.id).each do |character| %>
+    <div class="card">
+        <div class="card-header">
+            <%= character.race.name %>
+        </div>
+        <div class="card-body">
+            <%= render character %>
+        </div>
+    </div>
+    <% end %>
+    <% else %>
+    <h1>Personajes en el sistema</h1>
+    <% @characters.each do |character| %>
+    <div class="card">
+        <div class="card-header">
+            Usuario: <%= character.user.nickname %> | Raza: <%= character.race.name %> | <%= link_to "Editar", edit_character_path(character) %>
+        </div>
+        <div class="card-body">
+            <%= render character %>
+        </div>
+    </div>
+    <% end %>
+    <% end %>
+</div>

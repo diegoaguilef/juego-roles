@@ -10,6 +10,10 @@ class Character < ApplicationRecord
   before_validation :set_defaults, unless: :characters_templates
   validate :level_update
 
+  accepts_nested_attributes_for :skills
+  accepts_nested_attributes_for :powers
+  accepts_nested_attributes_for :equipments
+
   def alive?
     status.name == "alive"
   end

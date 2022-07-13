@@ -11,37 +11,77 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-row row row-cols-4">
+    <div class="col">
+      <%= form.label :name, style: "display: block", class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+    <div class="col">
+      <%= form.label :level, style: "display: block", class: "form-label" %>
+      <%= form.number_field :level, class: "form-control" %>
+    </div>
+  
+    <div class="col">
+      <%= form.label :mana, style: "display: block", class: "form-label" %>
+      <%= form.number_field :mana, class: "form-control" %>
+    </div>
+  
+    <div class="col">
+      <%= form.label :life_points, style: "display: block", class: "form-label" %>
+      <%= form.number_field :life_points, class: "form-control" %>
+    </div>
+  
+    <div class="col">
+      <%= form.label :race_id, style: "display: block", class: "form-label" %>
+      <%= form.collection_select :race_id, Race.all, :id, :name, { include_blank: "Seleccionar" }, class: "form-control" %>
+    </div>
+    <% if current_user.admin? || current_user.gm? %>
+    <div class="col">
+      <%= form.label :status_id, style: "display: block", class: "form-label" %>
+      <%= form.collection_select :status_id, Status.all, :id, :name, { include_blank: "Seleccionar" }, class: "form-control" %>
+    </div>
+    <% end %>
+  </div>
+  <br>
+  <h4>Configuraciones</h4>
+  <br>
+  <h5>Habilidades</h5>
+  <div class="row row-cols-4">
+    <% character.skills.each do |skill| %>
+      <%= form.fields_for :skill do |configuration_form| %>
+      <div class="col">
+        <%= configuration_form.label :skill_attributes, "Habilidad", tyle: "display: block", class: "form-label" %>
+        <%= configuration_form.collection_select :skill, Skill.all, :id, :name, { include_blank: "Seleccionar" }, class: "form-control", value: skill.id %>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+  <br>
+  <h5>Poderes</h5>
+  <div class="row row-cols-4">
+    <% character.powers.each do |power| %>
+      <%= form.fields_for :power_attributes do |configuration_form| %>
+      <div class="col">
+        <%= configuration_form.label :power, "Poder", tyle: "display: block", class: "form-label" %>
+        <%= configuration_form.collection_select :power, Power.all, :id, :name, { include_blank: "Seleccionar" }, class: "form-control" %>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+  <br>
+  <h5>Equipamientos</h5>
+  <div class="row row-cols-4">
+    <% character.equipments.each do |equipment| %>
+      <%= form.fields_for :equipment_attributes do |configuration_form| %>
+      <div class="col">
+        <%= configuration_form.label :equipment, "Equipamiento", tyle: "display: block", class: "form-label" %>
+        <%= configuration_form.collection_select :equipment, Equipment.all, :id, :name, { include_blank: "Seleccionar" }, class: "form-control" %>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-row mt-3">
+    <%= form.submit class: "btn btn-success" %>
   </div>
 
-  <div>
-    <%= form.label :level, style: "display: block" %>
-    <%= form.number_field :level %>
-  </div>
-
-  <div>
-    <%= form.label :mana, style: "display: block" %>
-    <%= form.number_field :mana %>
-  </div>
-
-  <div>
-    <%= form.label :life_points, style: "display: block" %>
-    <%= form.number_field :life_points %>
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
-
-  <div>
-    <%= form.label :race_id, style: "display: block" %>
-    <%= form.text_field :race_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
 <% end %>

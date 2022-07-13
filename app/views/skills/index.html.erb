@@ -2,13 +2,20 @@
 
 <h1>Habilidades</h1>
 
-<div id="habilities">
-  <% @skills.each do |skill| %>
-    <%= render skill %>
-    <p>
-      <%= link_to "Show this skill", skill %>
-    </p>
-  <% end %>
+<table class="table" id="habilities">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Puntos de daño</th>
+      <th>Descripción</th>
+      <th>Raza</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @skills.each do |skill| %>
+      <%= render skill %>
+    <% end %>
+  </tbody>
 </div>
 
-<%= link_to "New skill", new_skill_path %>
+<%= link_to "Nueva Habilidad", new_skill_path, class: "btn btn-info" %>

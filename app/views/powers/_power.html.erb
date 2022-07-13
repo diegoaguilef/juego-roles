@@ -1,22 +1,10 @@
-<div id="<%= dom_id power %>">
-  <p>
-    <strong>Name:</strong>
-    <%= power.name %>
-  </p>
-
-  <p>
-    <strong>Damage points:</strong>
-    <%= power.damage_points %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= power.description %>
-  </p>
-
-  <p>
-    <strong>Race:</strong>
-    <%= power.race_id %>
-  </p>
-
-</div>
+<tr id="<%= dom_id power %>">
+  <td><%= power.name %></td>
+  <td><%= power.description %></td>
+  <td><%= power.damage_points %></td>
+  <td><%= power.race.name %></td>
+  <td>
+    <%= link_to "Editar", edit_power_path(power), class: 'btn btn-warning btn-sm'%>
+    <%= link_to "Eliminar", power_path(power), data: { turbo_method: :delete, turbo_confirm: 'Estás seguro de eliminar?' }, class: 'btn btn-danger btn-sm'%>
+  </td>
+</tr>

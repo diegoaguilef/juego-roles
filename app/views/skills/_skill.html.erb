@@ -1,27 +1,10 @@
-<div id="<%= dom_id skill %>">
-  <p>
-    <strong>Name:</strong>
-    <%= skill.name %>
-  </p>
-
-  <p>
-    <strong>Damage points:</strong>
-    <%= skill.damage_points %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= skill.description %>
-  </p>
-
-  <p>
-    <strong>Category:</strong>
-    <%= skill.category %>
-  </p>
-
-  <p>
-    <strong>Race:</strong>
-    <%= skill.race_id %>
-  </p>
-
-</div>
+<tr id="<%= dom_id skill %>">
+  <td><%= skill.name %></td>
+  <td><%= skill.damage_points %></td>
+  <td><%= skill.description %></td>
+  <td><%= skill.race.name %></td>
+  <td>
+    <%= link_to "Editar", edit_skill_path(skill), class: 'btn btn-warning btn-sm'%>
+    <%= link_to "Eliminar", skill_path(skill), data: { turbo_method: :delete, turbo_confirm: 'Estás seguro de eliminar?' }, class: 'btn btn-danger btn-sm'%>
+  </td>
+</tr>
